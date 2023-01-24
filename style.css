@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('./Image/sky.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.input-container {
+    text-align: center;
+    margin-top: 20vw;
+}
+
+.input-container input {
+    width: 30vw;
+    border-radius: 20px;
+    margin-right: 1rem;
+    text-align: center;
+    color: rgb(171, 171, 171);
+    height: 4vh;
+}
+
+.input-container button {
+    font-size: 1rem;
+    border-radius: 20px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.weather-container {
+    width: 40vw;
+    margin: auto;
+    background-color: rgb(0, 0, 0);
+    margin-top: 3rem;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 5px rgb(39, 176, 239);
+    opacity: 0.6;
+    color: white;
+    text-align: center;
+}
+
+.info-container, .location {
+    font-family: 'Kodchasan', sans-serif;
+    font-size: 1.5rem;
+}
+
+.gps-wind-container{
+    display: flex;
+    justify-content:space-between;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+    font-size: 1rem;
+}
+
+.gps-wind-container > p{
+    width: 50vw;
+}
+
+.forecast-container{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2rem;
+}
+
+.forecastCard {
+    width: 15vw;
+    background-color: rgb(0,0,0);
+    opacity: 0.6;
+    color:white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 5px rgb(39, 176, 239);
+    text-align: center;
+}   
+
+.forecastCard h1 {
+    font-size: 1.4rem;
+}
+
+.forecastCard b{
+    font-size: 1.2rem;
+}
+
+footer {
+    position: absolute;
+    left:0;
+    right:0;
+    bottom: 0;
+    text-align: center;
+    background-color: #01263a;
+    border-top: 2px solid rgb(174, 174, 174);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: white;
+    line-height: 1.5rem;
+    margin-top: 2rem;
+}
