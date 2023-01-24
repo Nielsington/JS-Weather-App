@@ -4,14 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@1,300&display=swap" rel="stylesheet">
     <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
     <title>The Weather App</title>
 </head>
 <body>
-    <div>
-        <label for="city">Enter city: </label>
-        <input type="text" name="city">
-        <button type="submit">Submit</button>
+    <div class="input-container">
+        <input type="text" name="city" value ="Enter your city ツ">
     </div>
+    <div class="weather-container">
+        <img>
+        <h1></h1><br>
+        <div class="info-container">
+            <p></p><br>
+            <p class="description"></p>
+            <div class="gps-wind-container">
+                <p></p><br>
+                <p class="lonlat"></p><br>
+            </div>
+        </div>
+    </div>
+    <div class="forecast-container">
+    </div>
+    <footer>
+        
+    </footer>
 </body>
 </html>
