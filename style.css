@@ -40,7 +40,7 @@ body {
     margin-top: 3rem;
     border-radius: 20px;
     box-shadow: 0px 0px 10px 5px rgb(39, 176, 239);
-    opacity: 0.6;
+    opacity: 0.8;
     color: white;
     text-align: center;
 }
@@ -72,23 +72,24 @@ body {
 .forecastCard {
     width: 15vw;
     background-color: rgb(0,0,0);
-    opacity: 0.6;
+    opacity: 0.8;
     color:white;
     border-radius: 20px;
     box-shadow: 0px 0px 10px 5px rgb(39, 176, 239);
     text-align: center;
+    margin-bottom: 10rem;
 }   
 
 .forecastCard h1 {
     font-size: 1.4rem;
 }
 
-.forecastCard b{
+.forecastCard b, .description{
     font-size: 1.2rem;
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     left:0;
     right:0;
     bottom: 0;
