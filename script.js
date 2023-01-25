@@ -14,6 +14,7 @@ const description = document.querySelector('.description');
 const forecast = document.querySelector('.forecast-container');
 const footer = document.querySelector('footer');
 const input = document.querySelector('input');
+const date = weatherContainer.lastElementChild.previousElementSibling.previousElementSibling;
 let lon, lat;
 
 weatherContainer.style.display = 'none';
@@ -51,6 +52,13 @@ inputCity.addEventListener('keyup', function(e){
             } else{
                 cityParagraph.innerHTML = data1[0].name + ', '+ data1[0].state + ', ' + data1[0].country; 
             }
+
+            date.innerHTML = new Date().toLocaleDateString('en-'+ data1[0].country, {
+                weekday: "short",
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            });
 
             lonlatParagraph.innerHTML = '<b>GPS coordinates:</b><br><br>   ' + lon + ', ' + lat ;
 
