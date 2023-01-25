@@ -43,10 +43,10 @@ body {
     opacity: 0.8;
     color: white;
     text-align: center;
+    font-family: 'Kodchasan', sans-serif;
 }
 
 .info-container, .location {
-    font-family: 'Kodchasan', sans-serif;
     font-size: 1.5rem;
 }
 
@@ -67,6 +67,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     gap: 2rem;
+    font-family: 'Kodchasan', sans-serif;
 }
 
 .forecastCard {
