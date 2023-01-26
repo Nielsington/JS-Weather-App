@@ -34,8 +34,18 @@ inputCity.addEventListener('blur', function(){
 inputCity.addEventListener('keyup', function(e){
 
     if (e.key === 'Enter') {
-        forecast.innerHTML = '';
         let city = input.value;
+        let unsplashAPI = "https://api.unsplash.com/search/photos/?client_id=8uQObWzQ5xcpl0fCOyaL6DV1JAEyMNsZi6pYShPrOFw&query=" + city;
+        fetch(unsplashAPI)
+        .then(response => response.json())
+        .then(photo => {
+            let picture = photo.results[0].urls.full;
+            document.body.style.background = `url(${picture})`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundRepeat = 'no-repeat';
+        });
+
+        forecast.innerHTML = '';
         weatherContainer.style.display = '';
         inputContainer.style.marginTop = '2rem';
         footer.style.position = 'static';
@@ -58,7 +68,7 @@ inputCity.addEventListener('keyup', function(e){
                 day: "2-digit",
                 month: "long",
                 year: "numeric"
-            });
+            }) + '<br><br>';
 
             lonlatParagraph.innerHTML = '<b>GPS coordinates:</b><br><br>   ' + lon + ', ' + lat ;
 
@@ -72,7 +82,6 @@ inputCity.addEventListener('keyup', function(e){
 
                 //Weather icon
                 weatherIcon.src = 'http://openweathermap.org/img/wn/'+ data2.list[0].weather[0].icon + '@2x.png'
-
                 // Create forecast
                 // Calculate time (1 day = ((8-1)x3hours), 5 days = (35x3hours))
                 let forecastDates = [];
@@ -81,19 +90,41 @@ inputCity.addEventListener('keyup', function(e){
                     let date = new Date(dt*1000);
                     let hour = date.getUTCHours();
                     let minute = date.getUTCMinutes();
-                    
 
                     if (hour === 0 && minute === 0){
                         forecastDates.push(i);
-                    }
-
+                    } 
                 }
+
+                console.log(data2);
+                // Calculate min and max degree per day       
+                let maxC, minC;
+                const minMaxDegree = (forecastDate) => {
+                    let listOfDegree = [];
+
+                    for (let i = forecastDate; i<=forecastDate+8; i++){
+                        if(i > data2.list.length-1){
+                            break;
+                        }
+                        listOfDegree.push(Math.round(data2.list[i].main.temp_min));
+                        listOfDegree.push(Math.round(data2.list[i].main.temp_max));
+                    }
+                    minC = Math.min(...listOfDegree);
+                    maxC = Math.max(...listOfDegree);
+                }
+
 
                 // Add cards for 5 days
                 for (let forecastDate of forecastDates){
+                    minMaxDegree(forecastDate);
+                    console.log(minC, maxC);
                     const forecastCard = document.createElement('div');
                     forecastCard.classList.add('forecastCard');
                     forecast.appendChild(forecastCard);
+
+                    const date = document.createElement('p');
+                    date.classList.add('forecast-date'),
+                    forecastCard.appendChild(date);
 
                     const weatherIcon = document.createElement('img');
                     weatherIcon.src = 'http://openweathermap.org/img/wn/'+ data2.list[forecastDate].weather[0].icon + '@2x.png';
@@ -102,34 +133,45 @@ inputCity.addEventListener('keyup', function(e){
                     const cityParagraph = document.createElement('h1');
                     forecastCard.appendChild(cityParagraph);
 
-                    const date = document.createElement('p');
-                    forecastCard.appendChild(date);
-
                     const forecastInfoContainer = document.createElement('div');
                     forecastCard.appendChild(forecastInfoContainer);
-
-                    const degreeParagraph = document.createElement('p');
-                    forecastInfoContainer.appendChild(degreeParagraph)
 
                     const description = document.createElement('p');
                     description.classList.add('description');
                     forecastInfoContainer.appendChild(description);
+
+                    const degreeParagraph = document.createElement('p');
+                    forecastInfoContainer.appendChild(degreeParagraph)
+
+                    const minmaxContainer = document.createElement('div');
+                    minmaxContainer.classList.add('minmaxContainer');
+                    forecastInfoContainer.appendChild(minmaxContainer);
+
+                    const minContainer = document.createElement('div');
+                    minContainer.classList.add('wrapContainer');
+                    minmaxContainer.appendChild(minContainer);
+
+                    const maxContainer = document.createElement('div');
+                    maxContainer.classList.add('wrapContainer');
+                    minmaxContainer.appendChild(maxContainer);
+
+                    const minDegreeParagraph = document.createElement('p');
+                    minContainer.appendChild(minDegreeParagraph);
+
+                    const minDegree = document.createElement('p');
+                    minContainer.appendChild(minDegree);
+
+                    const maxDegreeParagraph = document.createElement('p');
+                    maxContainer.appendChild(maxDegreeParagraph);
+
+                    const maxDegree = document.createElement('p');
+                    maxContainer.appendChild(maxDegree);
 
                     const forecastCoord = document.createElement('div');
                     forecastInfoContainer.appendChild(forecastCoord);
 
                     const windParagraph = document.createElement('p');
                     forecastCoord.appendChild(windParagraph);
-
-                    const lonlatParagraph = document.createElement('p');
-                    forecastCoord.appendChild(lonlatParagraph);
-                    
-                    //TODO:
-                    if(data1[0].state === undefined){
-                        cityParagraph.innerHTML = data1[0].name + ', ' + data1[0].country + '<br><br>';
-                    } else{
-                        cityParagraph.innerHTML = data1[0].name + ', '+ data1[0].state + ', ' + data1[0].country + '<br><br>';
-                    }
 
                     let transformDate = new Date(data2.list[forecastDate].dt*1000);
                     
@@ -141,22 +183,21 @@ inputCity.addEventListener('keyup', function(e){
                     });
                     date.innerHTML = getDate + '<br><br>';
 
-                    degreeParagraph.innerHTML = '<b>' + Math.round(data2.list[forecastDate].main.temp) + '°C </b><br><br>';
+                    if(data1[0].state === undefined){
+                        cityParagraph.innerHTML = data1[0].name + ', ' + data1[0].country + '<br>';
+                    } else{
+                        cityParagraph.innerHTML = data1[0].name + ', '+ data1[0].state + ', ' + data1[0].country + '<br>';
+                    }
+
                     description.innerHTML = data2.list[forecastDate].weather[0].description + ', captain.<br><br>';
+                    degreeParagraph.innerHTML = '<b>' + Math.round(data2.list[forecastDate].main.temp) + '°C </b><br><br>';
+                    minDegreeParagraph.innerHTML = '<b>min</b><hr>';
+                    maxDegreeParagraph.innerHTML = '<b>max</b><hr>';
+                    minDegree.innerHTML = minC + '°C';
+                    maxDegree.innerHTML = maxC + '°C';
                     windParagraph.innerHTML = '<b>Wind speed:</b><br><br>  ' + data2.list[forecastDate].wind.speed + ' meter/sec<br><br>';
-                    lonlatParagraph.innerHTML = '<b>GPS coordinates:</b><br><br>   ' + data2.city.coord.lon + ', ' + data2.city.coord.lat ;
-                    lonlatParagraph.style.marginBottom = '2rem';
                 }
             });
-        });
-        let unsplashAPI = "https://api.unsplash.com/search/photos/?client_id=8uQObWzQ5xcpl0fCOyaL6DV1JAEyMNsZi6pYShPrOFw&query=" + city;
-        fetch(unsplashAPI)
-        .then(response => response.json())
-        .then(photo => {
-            let picture = photo.results[0].urls.full;
-            document.body.style.background = `url(${picture})`;
-            document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundRepeat = 'no-repeat';
         });
     }
 });
