@@ -24,13 +24,7 @@ body {
     text-align: center;
     color: rgb(171, 171, 171);
     height: 4vh;
-}
-
-.input-container button {
-    font-size: 1rem;
-    border-radius: 20px;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    font-size: 1.2em;
 }
 
 .weather-container {
@@ -44,6 +38,10 @@ body {
     color: white;
     text-align: center;
     font-family: 'Kodchasan', sans-serif;
+}
+
+.weather-container h1{
+    margin: 0.2rem;
 }
 
 .info-container, .location {
@@ -80,13 +78,37 @@ body {
     text-align: center;
     margin-bottom: 10rem;
 }   
+.forecast-date{
+    margin: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.forecast-container img{
+    margin-top: -2rem;
+}
 
 .forecastCard h1 {
     font-size: 1.4rem;
+    margin: 0.5rem;
 }
 
-.forecastCard b, .description{
+.description{
     font-size: 1.2rem;
+}
+
+.minmaxContainer{
+    min-width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.minmaxContainer{
+    margin-bottom: 2rem;
+}
+
+.wrapContainer p:first-child{
+    margin-bottom: 1rem;
 }
 
 footer {
@@ -103,3 +125,17 @@ footer {
     line-height: 1.5rem;
     margin-top: 2rem;
 }
+
+@media only screen and (max-width: 1023px) {
+    .input-container input {
+        width: 50%;
+    }
+
+    .weather-container {
+        width: 75%;
+    }
+
+    .forecastCard{
+        width: 20%;
+    }
+  }
