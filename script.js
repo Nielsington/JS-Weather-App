@@ -1,6 +1,7 @@
-const inputCity = document.querySelector('input');
 const keyGeo = 'secret';
 const keyForecast = 'secret';
+
+const inputCity = document.querySelector('input');
 const weatherIcon = document.querySelector('img');
 const weatherContainer = document.querySelector('.weather-container');
 const inputContainer = document.querySelector('.input-container');
@@ -117,7 +118,6 @@ inputCity.addEventListener('keyup', function(e){
                 // Add cards for 5 days
                 for (let forecastDate of forecastDates){
                     minMaxDegree(forecastDate);
-                    console.log(minC, maxC);
                     const forecastCard = document.createElement('div');
                     forecastCard.classList.add('forecastCard');
                     forecast.appendChild(forecastCard);
@@ -148,11 +148,11 @@ inputCity.addEventListener('keyup', function(e){
                     forecastInfoContainer.appendChild(minmaxContainer);
 
                     const minContainer = document.createElement('div');
-                    minContainer.classList.add('wrapContainer');
+                    minContainer.classList.add('wrapContainer', 'minForecast');
                     minmaxContainer.appendChild(minContainer);
 
                     const maxContainer = document.createElement('div');
-                    maxContainer.classList.add('wrapContainer');
+                    maxContainer.classList.add('wrapContainer', 'maxForecast');
                     minmaxContainer.appendChild(maxContainer);
 
                     const minDegreeParagraph = document.createElement('p');
@@ -183,13 +183,8 @@ inputCity.addEventListener('keyup', function(e){
                     });
                     date.innerHTML = getDate + '<br><br>';
 
-                    if(data1[0].state === undefined){
-                        cityParagraph.innerHTML = data1[0].name + ', ' + data1[0].country + '<br>';
-                    } else{
-                        cityParagraph.innerHTML = data1[0].name + ', '+ data1[0].state + ', ' + data1[0].country + '<br>';
-                    }
-
-                    description.innerHTML = data2.list[forecastDate].weather[0].description + ', captain.<br><br>';
+                    cityParagraph.innerHTML = data1[0].name + ', ' + data1[0].country;
+                    description.innerHTML = data2.list[forecastDate].weather[0].description;
                     degreeParagraph.innerHTML = '<b>' + Math.round(data2.list[forecastDate].main.temp) + '°C </b><br><br>';
                     minDegreeParagraph.innerHTML = '<b>min</b><hr>';
                     maxDegreeParagraph.innerHTML = '<b>max</b><hr>';
