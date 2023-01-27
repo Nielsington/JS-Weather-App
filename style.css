@@ -44,6 +44,10 @@ body {
     margin: 0.2rem;
 }
 
+.weatherContainerDate {
+    font-size: 1.25rem;
+}
+
 .info-container, .location {
     font-size: 1.5rem;
 }
@@ -66,10 +70,12 @@ body {
     justify-content: space-evenly;
     gap: 2rem;
     font-family: 'Kodchasan', sans-serif;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .forecastCard {
-    width: 15vw;
+    width: 20%;
     background-color: rgb(0,0,0);
     opacity: 0.8;
     color:white;
@@ -79,7 +85,7 @@ body {
     margin-bottom: 10rem;
 }   
 .forecast-date{
-    margin: 1.5rem;
+    margin: 1rem;
     font-size: 1.2rem;
 }
 
@@ -94,17 +100,18 @@ body {
 
 .description{
     font-size: 1.2rem;
+    margin-bottom: 2rem;
 }
 
 .minmaxContainer{
     min-width: 100%;
     display: flex;
     justify-content: space-evenly;
-
+    margin-bottom: 2rem;
 }
 
-.minmaxContainer{
-    margin-bottom: 2rem;
+.wrapContainer{
+    width: 20%;
 }
 
 .wrapContainer p:first-child{
@@ -126,7 +133,7 @@ footer {
     margin-top: 2rem;
 }
 
-@media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: 1050px) {
     .input-container input {
         width: 50%;
     }
@@ -135,7 +142,61 @@ footer {
         width: 75%;
     }
 
-    .forecastCard{
-        width: 20%;
+    .forecast-container {
+        margin-top: 8rem;
     }
+
+    .forecast-date{
+        font-size: 1rem;
+    }
+
+    .minForecast, .maxForecast{
+            width: 17.5%;
+        }
+  }
+
+  @media only screen and (max-width: 920px) {
+    .forecast-date{
+        font-size: 0.75rem;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .weather-container {
+        width: 85%;
+    }
+    .forecast-container {
+        margin-left: 3rem;
+        margin-right: 3rem;
+        margin-top: 2.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .forecastCard{
+        width: 45%;
+        margin-bottom: 1rem;
+    }
+    .forecast-date{
+        font-size: 1rem;
+    }
+  }
+
+  @media only screen and (max-width: 505px) {
+    .weather-container{
+        width: 90%;
+    }
+
+    .forecast-container{
+        flex-direction: column;
+        width: 90%;
+        margin-left: 1.5rem;
+    }
+
+    .forecastCard{
+        width: 100%;
+    }
+   .forecastCard h1 {
+    font-size: 1.5rem;
+   }
   }
