@@ -52,7 +52,7 @@ inputCity.addEventListener('keyup', function(e){
         footer.style.position = 'static';
 
         //Get lon, lat, country and display them
-        fetch('http://api.openweathermap.org/geo/1.0/direct?q='+city+'&limit=1&appid=' + keyGeo)
+        fetch('https://api.openweathermap.org/geo/1.0/direct?q='+city+'&limit=1&appid=' + keyGeo)
         .then(response => response.json())
         .then(data1 => {
             lon = data1[0].lon;
@@ -74,7 +74,7 @@ inputCity.addEventListener('keyup', function(e){
             lonlatParagraph.innerHTML = '<b>GPS coordinates:</b><br><br>   ' + lon + ', ' + lat ;
 
             // Get all the other info and display them
-            return fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=metric&appid=' + keyForecast)
+            return fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=metric&appid=' + keyForecast)
             .then(response => response.json())
             .then(data2 => {
                 degreeParagraph.innerHTML = '<b>' + Math.round(data2.list[0].main.temp) + '°C </b>';
@@ -82,7 +82,7 @@ inputCity.addEventListener('keyup', function(e){
                 description.innerHTML = data2.list[0].weather[0].description + ', captain.';
 
                 //Weather icon
-                weatherIcon.src = 'http://openweathermap.org/img/wn/'+ data2.list[0].weather[0].icon + '@2x.png'
+                weatherIcon.src = 'https://openweathermap.org/img/wn/'+ data2.list[0].weather[0].icon + '@2x.png'
                 // Create forecast
                 // Calculate time (1 day = ((8-1)x3hours), 5 days = (35x3hours))
                 let forecastDates = [];
